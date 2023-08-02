@@ -1,0 +1,141 @@
+1) Посмотреть где я 
+--- pwd
+2) Создать папку 
+--- mkdir f1
+3) Зайти в папку 
+--- cd f1
+4) Создать 3 папки 
+--- mkdir f2 f3 f4
+5) Зайти в любоую папку 
+--- cd f2
+6) Создать 5 файлов (3 txt, 2 json) 
+--- cat > p1.txt или 
+---touch (name){0..99} создает сразу несколько файлов
+---touch p{1..3}.txt p{4..5}.json 
+7) Создать 3 папки 
+--- mkdir f5 f6 f7
+8. Вывести список содержимого папки 
+--- ls
+9) + Открыть любой txt файл 
+--- cat > p1.txt
+10) + написать туда что-нибудь, любой текст. 
+--- HELLO m
+11) + сохранить и выйти. 
+CTRL + C
+12) Выйти из папки на уровень выше 
+--- cd..
+13) переместить любые 2 файла, которые вы создали, в любую другую папку. 
+--- mv p5.json ~/Desktop/terminal1/f1 второй файл аналогично.
+14) скопировать любые 2 файла, которые вы создали, в любую другую папку. 
+--- cp p1.txt p1.txt и переместить ---mv p1.txt ~/Desktop/terminal1/f1 и второй файл аналогично.
+15) Найти файл по имени 
+--- $ find -name p1.txt -print
+16) просмотреть содержимое в реальном времени (команда grep) изучите как она работает. 
+--- tail -f p1.txt 
+17) вывести несколько первых строк из текстового файла
+--- $ head -n3 f1.txt
+
+18) вывести несколько последних строк из текстового файла
+--- $ tail -n3 f1.txt
+
+19) просмотреть содержимое длинного файла (команда less) 
+изучите как она работает. 
+--- $ less -c f1.txt после просмотра для выхода нажать Q или ZZ
+
+20) вывести дату и время
+--- date +"%H:%M %d/%m/%Y"
+--- date
+=========
+Задание *
+
+1) Отправить http запрос на сервер.
+http://162.55.220.72:5006/terminal-hw-request
+РЕШЕНИЕ:
+--------------------------------------------------
+ --- $ curl http://162.55.220.72:5006/terminal-hw-request
+ВЫВОД:
+{
+  "Intro": "Hello!! This is your the first response from server",
+  "Tasks": {
+    "Task_1": "Send the next URL in terminal: http://162.55.220.72:5005/get_meth
+od?name=(set_your_String)&age=(set_your_number)",
+    "result": [
+      "Your_String",
+      "Your_number"
+    ]
+  }
+}
+----------------------------------------------
+--- $  curl "http://162.55.220.72:5005/get_method?name=Alexey&age=21" 
+--- Самое трудное было это найти забытые Вадимом кавычки.
+ВЫВОД:
+[
+  "Alexey",
+  "21"
+]
+Как видем, имя и возраст отображаются корректно. 
+--------------------------------------------
+2)Написать скрипт который выполнит автоматически пункты 3, 4, 5, 6, 7, 8, 13
+
+
+Сначала продумал как это будет работать без скрипта и запускал одной командой.
+mkdir f1; ls; cd f1; mkdir f2 f3 f4; ls; cd f2; touch p{1..3}.txt p{4..5}.json; ls; cd ..; ls; cd f3; mkdir f5 f6 f7; ls; ls -la; cd ..; cd f2; ls; mv p1.txt ~/Desktop/terminal1/f1; mv p2.txt ~/Desktop/terminal1/f1; cd ..; ls -la
+После этих действий можно сказать что скрипт готов на 80%.
+
+$ nano myscript1.but ---команда для создание скриптов 
+#!/bin/bash ---главная команда при создании скриптов
+ mkdir f1
+ ls
+ cd f1
+ mkdir f2 f3 f4
+ ls
+ cd f2
+ touch p{1..3}.txt p{4..5}.json
+ ls
+ cd ..
+ ls
+ cd f3
+ mkdir f5 f6 f7
+ ls
+ ls -la
+ cd ..
+ cd f2
+ ls
+ mv p1.txt ~/Desktop/terminal1/f1
+ mv p2.txt ~/Desktop/terminal1/f1
+ cd ..
+ ls -la
+далее сохраняем и выходим.
+
+
+12@DESKTOP-RAD1AI7 MINGW64 ~/Desktop/terminal1/f1/f1
+$ ls -l ---Проверяем скрипт на существование.
+total 5
+drwxr-xr-x 1 12 197121   0 Aug  2 18:20 f2/
+drwxr-xr-x 1 12 197121   0 Aug  2 18:20 f3/
+drwxr-xr-x 1 12 197121   0 Aug  2 18:20 f4/
+-rwxr-xr-x 1 12 197121 223 Aug  2 21:31 myscript1.but*
+--- Скрипт обнаружен .
+
+12@DESKTOP-RAD1AI7 MINGW64 ~/Desktop/terminal1/f1/f1
+$ bash myscript1.but
+f1  f2  f3  f4  myscript1.but
+f2  f3  f4
+p1.txt  p2.txt  p3.txt  p4.json  p5.json
+f2  f3  f4
+f5  f6  f7
+total 0
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 .
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 ..
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 f5
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 f6
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 f7
+p1.txt  p2.txt  p3.txt  p4.json  p5.json
+total 4
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 .
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 ..
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 f2
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 f3
+drwxr-xr-x 1 12 197121 0 Aug  2 21:33 f4
+ Как видем скрипт полностью сработал, без ошибок.
+
